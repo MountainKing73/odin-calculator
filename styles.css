@@ -1,0 +1,19 @@
+#container {
+  margin: 33%;
+}
+
+#keypad {
+  display: flex;
+  flex-wrap: wrap;
+  width = 20%;
+  background-color: red;
+}
+
+#display {
+  text-align: right;
+}
+
+.btn {
+  flex-grow: 1;
+  flex-basis: 25%;
+}
