@@ -4,7 +4,6 @@ var operator = undefined;
 var entry = 0;
 
 function add(num1, num2) {
-  console.log("My add");
   return num1 + num2;
 }
 
@@ -35,12 +34,11 @@ function operate(operator, num1, num2) {
 
 function updateDisplay(num) {
   const display = document.querySelector("#display");
-  display.textContent = num;
+  display.textContent = Math.round(num * 1000000) / 1000000;
 }
 
 function buttonClicked(event) {
   let btnValue = event.target.innerText;
-  console.log("button clicked: " + btnValue);
   const display = document.querySelector("#display");
   let dispText = Number(display.innerText);
 
@@ -49,25 +47,30 @@ function buttonClicked(event) {
     case "-":
     case "x":
     case "÷":
-      console.log("Do operation " + btnValue);
       if (operator === undefined) {
+        operator = btnValue;
         left = Number(entry);
         entry = 0;
       } else {
-        operator = btnValue;
         right = Number(entry);
         entry = operate(operator, left, right);
         updateDisplay(entry);
+        left = entry;
+        right = 0;
+        entry = 0;
+        operator = btnValue;
       }
       break;
     case "=":
-      console.log("Do equal");
       right = Number(entry);
       entry = operate(operator, left, right);
+      // Copy value to left to continue operations and clear right and operation
+      left = entry;
+      right = 0;
+      operator = undefined;
       updateDisplay(entry);
       break;
     case "C":
-      console.log("Do clear");
       entry = 0;
       operator = undefined;
       left = 0;
@@ -75,7 +78,6 @@ function buttonClicked(event) {
       updateDisplay(entry);
       break;
     default:
-      console.log("Number key");
       if (entry === 0) {
         entry = btnValue;
       } else {
