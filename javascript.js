@@ -37,6 +37,15 @@ function updateDisplay(num) {
   display.textContent = Math.round(num * 1000000) / 1000000;
 }
 
+function displayDivideByZero() {
+  const display = document.querySelector("#display");
+  display.textContent = "STOP THAT!";
+  entry = 0;
+  operator = undefined;
+  left = 0;
+  right = 0;
+}
+
 function buttonClicked(event) {
   let btnValue = event.target.innerText;
   const display = document.querySelector("#display");
@@ -53,6 +62,10 @@ function buttonClicked(event) {
         entry = 0;
       } else {
         right = Number(entry);
+        if (operator === "÷" && right === 0) {
+          displayDivideByZero();
+          break;
+        }
         entry = operate(operator, left, right);
         updateDisplay(entry);
         left = entry;
@@ -64,6 +77,10 @@ function buttonClicked(event) {
     case "=":
       right = Number(entry);
       entry = operate(operator, left, right);
+      if (operator === "÷" && right === 0) {
+        displayDivideByZero();
+        break;
+      }
       // Copy value to left to continue operations and clear right and operation
       left = entry;
       right = 0;
