@@ -100,6 +100,14 @@ function buttonClicked(event) {
       right = 0;
       updateDisplay(entry);
       break;
+    case "+/-":
+      if (dispText.charAt(0) === "-") {
+        entry = dispText.substring(1);
+      } else {
+        entry = "-" + entry;
+      }
+      updateDisplay(entry);
+      break;
     default:
       if (entry === 0) {
         entry = btnValue;
