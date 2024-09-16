@@ -6,21 +6,28 @@
   display: flex;
   flex-wrap: wrap;
   width = 20%;
-  background-color: red;
+  background-color: black;
 }
 
 #display {
   text-align: right;
   border: 1px solid;
   padding: 5px;
+  background-color: lightgray;
 }
 
 .btn {
   flex-grow: 1;
   flex-basis: 25%;
+  background-color: lightgreen;
+  border-radius: 50%;
 }
 
 #btn0 {
   flex-grow: 1;
   flex-basis: 50%;
+}
+
+.btnOper {
+  background-color: lightblue;
 }
