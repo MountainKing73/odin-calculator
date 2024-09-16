@@ -80,6 +80,9 @@ function buttonClicked(event) {
       }
       break;
     case "=":
+      if (operator === undefined) {
+        break;
+      }
       right = Number(entry);
       entry = operate(operator, left, right);
       if (operator === "÷" && right === 0) {
@@ -107,6 +110,18 @@ function buttonClicked(event) {
         entry = "-" + entry;
       }
       updateDisplay(entry);
+      break;
+    case "BS":
+      if (entry.toString().length === 1) {
+        entry = 0;
+        updateDisplay(entry);
+      } else {
+        if (entry.charAt(entry.length - 1) == ".") {
+          document.getElementById("btnDec").disabled = false;
+        }
+        entry = entry.substring(0, entry.length - 1);
+        updateDisplay(entry);
+      }
       break;
     default:
       if (entry === 0) {
