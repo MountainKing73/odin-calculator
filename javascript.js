@@ -34,7 +34,11 @@ function operate(operator, num1, num2) {
 
 function updateDisplay(num) {
   const display = document.querySelector("#display");
-  display.textContent = Math.round(num * 1000000) / 1000000;
+  display.textContent = num;
+}
+
+function displayResult(num) {
+  updateDisplay(Math.round(num * 1000000) / 1000000);
 }
 
 function displayDivideByZero() {
@@ -49,7 +53,7 @@ function displayDivideByZero() {
 function buttonClicked(event) {
   let btnValue = event.target.innerText;
   const display = document.querySelector("#display");
-  let dispText = Number(display.innerText);
+  let dispText = display.innerText;
 
   switch (btnValue) {
     case "+":
@@ -67,11 +71,12 @@ function buttonClicked(event) {
           break;
         }
         entry = operate(operator, left, right);
-        updateDisplay(entry);
+        displayResult(entry);
         left = entry;
         right = 0;
         entry = 0;
         operator = btnValue;
+        document.getElementById("btnDec").disabled = false;
       }
       break;
     case "=":
@@ -85,7 +90,8 @@ function buttonClicked(event) {
       left = entry;
       right = 0;
       operator = undefined;
-      updateDisplay(entry);
+      displayResult(entry);
+      document.getElementById("btnDec").disabled = false;
       break;
     case "C":
       entry = 0;
@@ -98,9 +104,12 @@ function buttonClicked(event) {
       if (entry === 0) {
         entry = btnValue;
       } else {
-        entry = Number(dispText + btnValue);
+        entry = dispText + btnValue;
       }
       updateDisplay(entry);
+      if (btnValue === ".") {
+        document.getElementById("btnDec").disabled = true;
+      }
       break;
   }
 }

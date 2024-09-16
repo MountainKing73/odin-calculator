@@ -19,3 +19,8 @@
   flex-grow: 1;
   flex-basis: 25%;
 }
+
+#btn0 {
+  flex-grow: 1;
+  flex-basis: 50%;
+}
